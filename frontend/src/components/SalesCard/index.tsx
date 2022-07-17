@@ -4,7 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import NotificationButton from "../NotificationButton"
 import "./styles.css"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios";
 
 /*Pra mudar o visual de um componente no React, preciso mudar o DADO. */
 export default function SalesCard() {
@@ -15,6 +16,13 @@ export default function SalesCard() {
     const [minDate, setMinDate] = useState(min)
     const [maxDate, setMaxDate] = useState(max)
 
+    useEffect(() => {
+        axios.get("http://localhost:8080/sales")
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(e => console.log(e))
+    }, [])
 
     return (
         <>
